@@ -11,7 +11,7 @@ class HomePage extends Component {
   render() {
     if (!this.props.movies) {
       return (
-        <div>Just wait</div>
+        <div class="loader"></div>
       )
     }
     return (

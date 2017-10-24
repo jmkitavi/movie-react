@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import { PropTypes } from "prop-types";
 import * as movieActions from "../../actions/movieActions";
 
-
 class MoviePage extends Component {
   componentDidMount() {
     if (!this.props.movie) {
@@ -14,7 +13,7 @@ class MoviePage extends Component {
   render() {
     if (!this.props.movie) {
       return (
-        <div>Just wait</div>
+        <div className="loader"></div>
       )
     }
     return (
@@ -86,4 +85,5 @@ function mapStateToProps(state, ownProps) {
     }
   }
 }
+
 export default connect(mapStateToProps)(MoviePage);
