@@ -1,22 +1,40 @@
 import axios from 'axios';
+import moment from "moment";
+
+const api_key = "b830fe99b34180f5a50a662f90258090";
+
+const addPosterUrl = (movie) => {
+
+  // return movies.map(movie => {
+    movie.poster_url = `https://image.tmdb.org/t/p/w500${movie.poster_path}`;
+    movie.backdrop_url = `https://image.tmdb.org/t/p/w500${movie.backdrop_path}`;
+    movie.release = moment(movie.released_date).format('ll');
+    return movie;
+  // })
+}
 
 class MovieApi {
-  // static getMovie(movieId) {
-  //   return new Promise((resolve, reject) => {
-  //     resolve(Object.assign({}, movie))
-  //   })
-  // }
-
-  static getPopularMovies() {
-    const url = 'https://api.themoviedb.org/3/movie/popular?api_key=b830fe99b34180f5a50a662f90258090&language=en-US&page=1'
+  static getMovie(movieId) {
+    const url = `https://api.themoviedb.org/3/movie/${movieId}?api_key=${api_key}`
     return axios.get(url)
       .then(response => {
-        return response;
+        return addPosterUrl(response.data);
+      }).catch(error => {
+        console.log(error)
+        return error;
+      });
+  }
+
+  static getPopularMovies() {
+    const url = `https://api.themoviedb.org/3/movie/popular?api_key=${api_key}`
+    return axios.get(url)
+      .then(response => {
+        const movies = response.data.results.map(addPosterUrl)
+        return movies;
       }).catch(error => {
         return error;
       });
     }
-
 }
 
 export default MovieApi;
