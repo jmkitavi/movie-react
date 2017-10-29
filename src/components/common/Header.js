@@ -11,7 +11,7 @@ class Header extends Component {
           </div>
           <ul className="nav navbar-nav">
             <li><IndexLink to="/" activeClassName="active">Home</IndexLink></li>
-            <li><Link to="/upcoming" activeClassName="active">Upcoming Movies</Link></li>
+            <li><Link to="/upcoming" activeClassName="active">Upcoming</Link></li>
           </ul>
         </div>
       </nav>

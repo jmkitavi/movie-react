@@ -5,6 +5,10 @@ export function loadPopularMoviesSuccess(movies) {
   return {type: types.LOAD_POPULAR_MOVIES_SUCCESS, movies}  // return action type plus data(movies)
 }
 
+export function loadUpcomingMoviesSuccess(movies) {
+  return {type: types.LOAD_UPCOMING_MOVIES_SUCCESS, movies}  // return action type plus data(movies)
+}
+
 export function loadMovieSuccess(movie) {
   return {type: types.LOAD_MOVIE_SUCCESS, movie}
 }
@@ -17,13 +21,18 @@ export function loadPopularMovies() { // function that does the loading
   }
 }
 
+export function loadUpcomingMovies() {
+  return dispatch => {
+    return MovieAPI.getUpcomingMovies().then(movies => {
+      dispatch(loadUpcomingMoviesSuccess(movies));
+    }).catch(error => console.log(error));
+  }
+}
+
 export function loadMovie(movieId) {
   return dispatch => {
     return MovieAPI.getMovie(movieId).then(movie => {
       dispatch(loadMovieSuccess(movie));
-    }).catch(error => {
-      console.log(error)
-      // dispatch(loadMovieError(error))
-    });
+    }).catch(error => console.log(error));
   }
 }

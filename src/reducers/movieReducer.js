@@ -7,8 +7,10 @@ export default function movieReducer(state = initialState.movies, action) {
     case types.LOAD_POPULAR_MOVIES_SUCCESS:
       return action.movies;
 
+    case types.LOAD_UPCOMING_MOVIES_SUCCESS:
+      return action.movies;
+
     case types.LOAD_MOVIE_SUCCESS:
-      // json.parse(json.stringify(obj)) solve reference
       return [...state, action.movie];
 
     default:
