@@ -12,6 +12,15 @@ const addPosterUrl = (movie) => {
 }
 
 class MovieApi {
+  static getGenres() {
+    return axios.get(`https://api.themoviedb.org/3/genre/movie/list?api_key=${api_key}`)
+      .then(response => {
+        return response.data.genres
+    }).catch(error => {
+      return error
+    })
+  }
+
   static getMovie(movieId) {
     const url = `https://api.themoviedb.org/3/movie/${movieId}?api_key=${api_key}`
     return axios.get(url)
