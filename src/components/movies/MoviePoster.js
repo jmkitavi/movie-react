@@ -12,6 +12,8 @@ const MoviePoster = ({movie}) => {
           <h2>{movie.title}</h2>
           <p>
           {movie.release}
+          <br/>
+          {movie.genre_names.join(", ")}
         </p>
         </div>
         </Link>

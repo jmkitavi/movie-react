@@ -29,10 +29,10 @@ class MoviePage extends Component {
               <div className="table-responsive">
                 <table className="table">
                   <tbody>
-                    {/* <tr>
-                      <td><strong>Genre:</strong></td>
-                      {<td>{this.state.genres}</td>}
-                    </tr> */}
+                    <tr>
+                      <td><strong>Genres:</strong></td>
+                      <td>{this.props.movie.genre_names.join(", ")}</td>
+                    </tr>
                     <tr>
                       <td><strong>Release:</strong></td>
                       <td>{this.props.movie.release_date}</td>
@@ -62,15 +62,13 @@ MoviePage.propTypes = {
 
 // Function to filter movie to be displayed by ID
 function getMovieById(movies, id) {
-   /* eslint-disable */
+  // eslint-disable-next-line
   const movie = movies.filter(movie => movie.id == id);
-  /* eslint-enable */
   if (movie) return movie[0];
   return null;
 }
 
 function mapStateToProps(state, ownProps) {
-  console.log(state)
   const movieId = ownProps.params.id;  // from /course/:id
   let movie = {};
   if (movieId && state.movies.length > 0) {
@@ -79,7 +77,6 @@ function mapStateToProps(state, ownProps) {
       movie: movie
     }
   } else {
-    console.log(`${movieId} doesn't exist in state`)
     return {
       movie: null
     }

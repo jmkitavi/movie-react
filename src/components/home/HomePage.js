@@ -16,18 +16,34 @@ class HomePage extends Component {
     }
     return (
       <div className="row">
-        {this.props.movies.map((movie) => <MoviePoster key={movie.id} movie={movie} />)}
+        {this.props.movies.map((movie) => {
+          if (movie.genre_ids) {
+            movie.genre_names = []
+            movie.genre_ids.map(id => {
+              this.props.genres.map(genre => {
+                // eslint-disable-next-line
+                if (id == genre.id) {
+                  movie.genre_names.push(genre.name)
+                }
+              })
+            })
+          }
+          return <MoviePoster key={movie.id} movie={movie} />
+        })
+        }
     </div>
     );
   }
 }
 
 HomePage.propTypes = {
-  movies: PropTypes.array.isRequired
+  movies: PropTypes.array.isRequired,
+  genres: PropTypes.array.isRequired
 };
 
 function mapStateToProps(state, ownProps) {
   return {
+    genres: state.genres,
     movies: state.movies
   };
 }

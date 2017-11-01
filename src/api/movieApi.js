@@ -4,7 +4,12 @@ import moment from "moment";
 const api_key = "b830fe99b34180f5a50a662f90258090";
 
 const addPosterUrl = (movie) => {
-
+  if (movie.genres) {
+    movie.genre_names = []
+    movie.genres.map((genre) => {
+      movie.genre_names.push(genre.name)
+    })
+  }
   movie.poster_url = `https://image.tmdb.org/t/p/w500${movie.poster_path}`;
   movie.backdrop_url = `https://image.tmdb.org/t/p/w500${movie.backdrop_path}`;
   movie.release = moment(movie.released_date).format('ll');
