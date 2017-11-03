@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
 import { PropTypes } from "prop-types";
+import { Link } from "react-router";
 import * as movieActions from "../../actions/movieActions";
 
 class MoviePage extends Component {
@@ -31,7 +32,13 @@ class MoviePage extends Component {
                   <tbody>
                     <tr>
                       <td><strong>Genres:</strong></td>
-                      <td>{this.props.movie.genre_names.join(", ")}</td>
+                      <td>{this.props.movie.genre_names.map((name) => {
+                          // this.props.genres.map((genre) => {
+                            // if (name == genre.name) {
+                              return <Link to={`/genre/${name}`}>{name} </Link>
+                            // }
+                          // })
+                      })}</td>
                     </tr>
                     <tr>
                       <td><strong>Release:</strong></td>
@@ -74,11 +81,13 @@ function mapStateToProps(state, ownProps) {
   if (movieId && state.movies.length > 0) {
     movie = getMovieById(state.movies, movieId)
     return {
-      movie: movie
+      movie: movie,
+      genres: state.genres,
     }
   } else {
     return {
-      movie: null
+      movie: null,
+      genres: state.genres,
     }
   }
 }

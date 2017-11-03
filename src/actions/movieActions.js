@@ -13,6 +13,10 @@ export function loadMovieSuccess(movie) {
   return {type: types.LOAD_MOVIE_SUCCESS, movie}
 }
 
+export function loadMoviesByGenreSuccess(movies) {
+  return {type: types.LOAD_MOVIES_BY_GENRE_SUCCESS, movies}
+}
+
 export function loadPopularMovies() { // function that does the loading
   return dispatch => {
     return MovieAPI.getPopularMovies().then(movies => { // calls the api to make the request
@@ -33,6 +37,14 @@ export function loadMovie(movieId) {
   return dispatch => {
     return MovieAPI.getMovie(movieId).then(movie => {
       dispatch(loadMovieSuccess(movie));
+    }).catch(error => console.log(error));
+  }
+}
+
+export function loadMoviesByGenre(genreId) {
+  return dispatch => {
+    return MovieAPI.getMoviesByGenre(genreId).then(movies => {
+      dispatch(loadMoviesByGenreSuccess(movies));
     }).catch(error => console.log(error));
   }
 }

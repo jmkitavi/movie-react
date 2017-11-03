@@ -10,8 +10,8 @@ const addPosterUrl = (movie) => {
       movie.genre_names.push(genre.name)
     })
   }
-  movie.poster_url = `https://image.tmdb.org/t/p/w500${movie.poster_path}`;
-  movie.backdrop_url = `https://image.tmdb.org/t/p/w500${movie.backdrop_path}`;
+    movie.poster_url = `https://image.tmdb.org/t/p/w500${movie.poster_path}`;
+    movie.backdrop_url = `https://image.tmdb.org/t/p/w500${movie.backdrop_path}`;
   movie.release = moment(movie.released_date).format('ll');
   return movie;
 }
@@ -56,6 +56,18 @@ class MovieApi {
       }).catch(error => {
         return error;
       });
+    }
+
+    static getMoviesByGenre(genreId) {
+      const url = "https://api.themoviedb.org/3/genre/35/movies?api_key=b830fe99b34180f5a50a662f90258090"
+      // const url = `https://api.themoviedb.org/3/genre/${genreId}/movies?api_key=${api_key}`
+      return axios.get(url)
+        .then(response => {
+          const movies = response.data.results.map(addPosterUrl)
+          return movies
+        }).catch(error => {
+          return error
+        })
     }
 }
 

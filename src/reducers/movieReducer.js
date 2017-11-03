@@ -13,6 +13,9 @@ export default function movieReducer(state = initialState.movies, action) {
     case types.LOAD_MOVIE_SUCCESS:
       return [...state, action.movie];
 
+    case types.LOAD_MOVIES_BY_GENRE_SUCCESS:
+      return action.movies
+
     default:
       return state
   }
