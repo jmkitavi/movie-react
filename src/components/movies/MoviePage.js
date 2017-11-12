@@ -76,7 +76,7 @@ function getMovieById(movies, id) {
 }
 
 function mapStateToProps(state, ownProps) {
-  const movieId = ownProps.params.id;  // from /course/:id
+  const movieId = ownProps.params.id;  // from /movie/:id
   let movie = {};
   if (movieId && state.movies.length > 0) {
     movie = getMovieById(state.movies, movieId)
