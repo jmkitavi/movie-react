@@ -48,3 +48,4 @@ export function loadMoviesByGenre(genreId) {
     }).catch(error => console.log(error));
   }
 }
+

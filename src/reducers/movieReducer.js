@@ -6,7 +6,7 @@ export default function movieReducer(state = initialState.movies, action) {
   switch(action.type) {
     case types.LOAD_POPULAR_MOVIES_SUCCESS:
       return action.movies;
-
+      
     case types.LOAD_UPCOMING_MOVIES_SUCCESS:
       return action.movies;
 
@@ -15,7 +15,6 @@ export default function movieReducer(state = initialState.movies, action) {
 
     case types.LOAD_MOVIES_BY_GENRE_SUCCESS:
       return action.movies
-
     default:
       return state
   }
