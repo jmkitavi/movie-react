@@ -3,10 +3,15 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import MoviePoster from '../movies/MoviePoster';
 import * as movieActions from "../../actions/movieActions";
+import * as genreActions from "../../actions/genresActions";
 
-class HomePage extends Component {
+class GenrePage extends Component {
   componentDidMount() {
-    this.props.dispatch(movieActions.loadPopularMovies());
+    if (this.props.genres.length < 1) {
+      this.props.dispatch(genreActions.loadGenres())
+    }
+    console.log(this.props)
+    this.props.dispatch(movieActions.loadMoviesByGenre(35));
   }
   render() {
     if (!this.props.movies) {
@@ -36,7 +41,7 @@ class HomePage extends Component {
   }
 }
 
-HomePage.propTypes = {
+GenrePage.propTypes = {
   movies: PropTypes.array.isRequired,
   genres: PropTypes.array.isRequired
 };
@@ -48,4 +53,4 @@ function mapStateToProps(state, ownProps) {
   };
 }
 
-export default connect(mapStateToProps)(HomePage);
+export default connect(mapStateToProps)(GenrePage);
