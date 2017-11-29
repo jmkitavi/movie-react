@@ -13,9 +13,6 @@ import './styles/styles.css';
 
 const store = configureStore()
 store.dispatch(loadGenres())
-
-
-const store = configureStore()
 store.dispatch(loadPopularMovies());
 
 render (
